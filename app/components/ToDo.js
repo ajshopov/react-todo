@@ -4,6 +4,7 @@ export default class ToDo extends React.Component{
   constructor(props){
     super(props)
     this.addNewItem = this.addNewItem.bind(this)
+    this.removeItem = this.removeItem.bind(this)
     this.state = {
       todos: props.todos || [],
       addNewToDo: ""
@@ -17,6 +18,11 @@ export default class ToDo extends React.Component{
     }
   }
 
+  removeItem(){
+    const newToDos = todos.filter((todo, index) => index != i)
+    this.setState({todos: newToDos})
+  }
+
   render(){
     const todos = this.state.todos
 
@@ -26,8 +32,16 @@ export default class ToDo extends React.Component{
       <div>
         <h1>My {this.props.listName} List</h1>
         {
-          todos.length > 0 ? todos.map((item, index) => <p key={index}> {item} </p>) : `No ${this.props.listName} items`
+        //   todos.length > 0 ? todos.map((item, index) => <p key={index}> {item} </p>) : `No ${this.props.listName} items`
         }
+        {todos.length > 0 ? todos.map((todo, i) => (
+          <p key={i} onClick={() => {
+            const newToDos = todos.filter((todo, index) => index != i)
+            this.setState({todos: newToDos})
+          }}>
+            {todo}
+          </p>
+        )) : <p>No {this.props.listName} items</p>}
         
 
         <input 

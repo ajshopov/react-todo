@@ -13,7 +13,7 @@ export default class App extends React.Component {
       <ToDo
         listName="Grocery"
         todos={
-          ['chips']
+          ['chips', 'beer']
         }
       />
     </div>
